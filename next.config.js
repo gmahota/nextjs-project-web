@@ -20,6 +20,7 @@ module.exports = withTM({
   },
   publicRuntimeConfig: {
     // Will be available on both server and client
-    SERVER_URI: process.env.SERVER_URI
+    SERVER_URI: process.env.SERVER_URI,
+    Auth: process.env.Auth
   },
 });

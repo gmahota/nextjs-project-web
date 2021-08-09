@@ -1,5 +1,8 @@
-import React  from 'react'
+import React from "react";
 import {
+  FiUserCheck,
+  FiUsers,
+  FiHome,
   FiSettings,
   FiShoppingBag,
   FiToggleLeft,
@@ -16,12 +19,13 @@ import {
   FiCompass,
   FiHelpCircle,
   FiShoppingCart,
-  FiHome,
 } from "react-icons/fi";
+
+import { AiFillProject } from "react-icons/ai";
 
 const initialState = [
   {
-    title: "Attendance",
+    title: "Credit Managment",
     items: [
       {
         url: "/",
@@ -58,6 +62,23 @@ const initialState = [
       },
       {
         url: "/",
+        icon: <AiFillProject size={20} />,
+        title: "Projects",
+        items: [
+          {
+            url: "/projects",
+            title: "Project's",
+            items: [],
+          },
+          {
+            url: "/projects/import",
+            title: "Import",
+            items: [],
+          },
+        ],
+      },
+      {
+        url: "/",
         icon: <FiShoppingBag size={20} />,
         title: "Sales",
         items: [
@@ -69,6 +90,28 @@ const initialState = [
           {
             url: "/sales",
             title: "Sales",
+            items: [],
+          },
+        ],
+      },
+      {
+        url: "/",
+        icon: <FiUserCheck size={20} />,
+        title: "Candidates",
+        items: [
+          {
+            url: "/candidates/dashboard",
+            title: "Dashboard's",
+            items: [],
+          },
+          {
+            url: "/candidates",
+            title: "Candidate's",
+            items: [],
+          },
+          {
+            url: "/candidates/import",
+            title: "Import",
             items: [],
           },
         ],
@@ -105,7 +148,7 @@ const initialState = [
         ],
       },
     ],
-  }
+  },
 ];
 
 export default function navigation(state = initialState, action) {

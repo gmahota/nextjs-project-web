@@ -1,22 +1,17 @@
-
 import React from 'react'
-import SectionTitle from "../components/elements/section-title";
-import { parseCookies } from 'nookies'
-
-import Widget1 from '../components/elements/dashboard/widget-1'
-import Section from '../components/elements/dashboard/section'
-
+import Widget1 from '../../components/elements/dashboard/widget-1'
+import Section from '../../components/elements/dashboard/section'
+import SectionTitle from '../../components/elements/dashboard/section-title'
 import { FiActivity, FiUsers, FiExternalLink, FiClock } from 'react-icons/fi'
-import { Bar1 } from '../components/elements/dashboard/bar-chart'
-import { Donut1 } from '../components/elements/dashboard/donut-chart'
-import { Line1 } from '../components/elements/dashboard/line-chart'
-import Dropdown1 from '../components/elements/widgets/dropdown-1'
-import Markets from '../components/elements/dashboard/markets'
-import { List } from '../components/elements/dashboard/list'
-import Tasks from '../components/elements/tasks'
-import { Timeline1 } from '../components/elements/timelines'
-import Notification from '../components/elements/dashboard/notification'
-
+import { Bar1 } from '../../components/elements/dashboard/bar-chart'
+import { Donut1 } from '../../components/elements/dashboard/donut-chart'
+import { Line1 } from '../../components/elements/dashboard/line-chart'
+import Dropdown1 from '../../components/elements/widgets/dropdown-1'
+import Markets from '../../components/elements/dashboard/markets'
+import { List } from '../../components/elements/dashboard/list'
+import Tasks from '../../components/elements/tasks'
+import { Timeline1 } from '../../components/elements/timelines'
+import Notification from '../../components/elements/dashboard/notification'
 
 const Index = () => {
   return (
@@ -27,7 +22,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Candidates"
+            title="Users"
             description={588}
             right={
               <FiUsers size={24} className="stroke-current text-gray-500" />
@@ -37,7 +32,7 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Project's"
+            title="Sessions"
             description={(1, 435)}
             right={
               <FiActivity size={24} className="stroke-current text-gray-500" />
@@ -47,8 +42,8 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="New Candidates"
-            description="20%"
+            title="Bounce rate"
+            description="40.5%"
             right={
               <FiExternalLink
                 size={24}
@@ -60,8 +55,8 @@ const Index = () => {
         {/*widget*/}
         <div className="w-full lg:w-1/4">
           <Widget1
-            title="Avarage Candidate Finished Process"
-            description="15 D"
+            title="Session duration"
+            description="1m 24s"
             right={
               <FiClock size={24} className="stroke-current text-gray-500" />
             }
@@ -72,7 +67,7 @@ const Index = () => {
       <div className="flex flex-col lg:flex-row w-full lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4">
         <div className="w-full lg:w-2/3">
           <Section
-            title="Candidates"
+            title="Conversions"
             description={<span>This year</span>}
             right={<Dropdown1 />}>
             <div className="flex flex-row w-full">
@@ -95,7 +90,7 @@ const Index = () => {
       <div className="w-full lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4">
         <Section
           title="Users"
-          description={<span>Most important projects</span>}>
+          description={<span>Most important markets</span>}>
           <div className="flex flex-col w-full">
             <div className="overflow-x-scroll lg:overflow-hidden">
               <Markets />
@@ -152,23 +147,4 @@ const Index = () => {
     </>
   )
 }
-
-export const getServerSideProps = async (ctx) => {
-  const { 'attendance.token': token } = parseCookies(ctx)
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  }
-  //await apiClient.get('/users')
-
-  return {
-    props: {}
-  }
-}
-
-export default Index;
+export default Index

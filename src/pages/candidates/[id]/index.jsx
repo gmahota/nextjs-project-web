@@ -14,9 +14,9 @@ import { FiEdit, FiPrinter, FiSend, FiTrash } from 'react-icons/fi';
 import { AiFillFileExcel, AiFillFilePdf } from "react-icons/ai"
 
 //Services
-import projectService from "../../../services/projects";
+import candidatesService from "../../../services/candidates";
 
-export default function Project({ project }) {
+export default function Candidate({ candidate }) {
   const router = useRouter();
   if (router.isFallback) {
     return <p>Carregando...</p>;
@@ -24,40 +24,43 @@ export default function Project({ project }) {
 
   const handlerEdit = () => { }
 
+  const items = [
+    { title: 'Code', element: <text>{candidate.code}</text> },
+    { title: 'Name', element: <text>{candidate.name}</text> },
+    { title: 'Status', element: <text>{candidate.status}</text> },
+    { title: 'Debt Capacity', element: <text>{candidate.debtCapacity}</text> },
+    { title: 'Phonenumber', element: <text>{candidate.phonenumber}</text> },
+    { title: 'Cellphone', element: <text>{candidate.cellphone}</text> },
+    { title: 'Email', element: <text>{candidate.email}</text> },
+    { title: 'Country', element: <text>{candidate.country}</text> },
+    { title: 'Province', element: <text>{candidate.province}</text> },
+    {
+      title: 'Address',
+      element: (
+        <p className="whitespace-normal">
+          {candidate.address}
+        </p>
+      )
+    }
+  ]
+
   const TabGeneral = () => {
     return (<>
       <div className="table table-auto w-full">
         <div className="table-row-group">
-
-          <div className="table-row" >
-            <div className="table-cell whitespace-nowrap px-2 text-sm">
-              Name
+          {items.map((item, i) => (
+            <div className="table-row" key={i}>
+              <div className="table-cell whitespace-nowrap px-2 text-sm">
+                {item.title}
+              </div>
+              <div className="table-cell px-2 whitespace-normal">
+                {item.element}
+              </div>
             </div>
-            <div className="table-cell px-2 whitespace-normal">
-              {project.name}
-            </div>
-          </div>
-
-          <div className="table-row" >
-            <div className="table-cell whitespace-nowrap px-2 text-sm">
-              Price
-            </div>
-            <div className="table-cell px-2 whitespace-normal">
-              {project.price}
-            </div>
-          </div>
-
-          <div className="table-row" >
-            <div className="table-cell whitespace-nowrap px-2 text-sm">
-              Status
-            </div>
-            <div className="table-cell px-2 whitespace-normal">
-              {project.status}
-            </div>
-          </div>
-
+          ))}
         </div>
-      </div> </>
+      </div>
+    </>
     );
   }
 
@@ -98,63 +101,72 @@ export default function Project({ project }) {
     const data = [
       {
         id: 1,
-        desc: "Processo de Candidaturas",
+        desc: "Validação dos dados Gerais",
         start: "2021-08-01",
         dueDate: "2021-08-12",
-        status: "Aberto",
-        priority: "Maxima",
-        assigned: "DAF"
-      },
-      {
-        id: 2,
-        desc: "Seleceção dos Candidatos",
-        start: "2021-08-13",
-        dueDate: "2021-08-15",
         status: "Aberto",
         priority: "Maxima",
         assigned: "Controle"
       },
       {
+        id: 2,
+        desc: "Registro dos dados do Conjuge",
+        start: "2021-08-13",
+        dueDate: "2021-08-15",
+        status: "Aberto",
+        priority: "Maxima",
+        assigned: "Candidato"
+      },
+      {
         id: 3,
-        desc: "Criação de Contrato",
+        desc: "Integrar Documento de Rendumentos",
         start: "2021-08-16",
         dueDate: "2021-09-15",
         status: "Aberto",
         priority: "Maxima",
-        assigned: "Finanças"
+        assigned: "Candidato"
       },
       {
         id: 4,
-        desc: "Cobrança 1ª Prestação",
+        desc: "Registro Co-devedor ou Avalista",
         start: "2021-09-25",
         dueDate: "2021-10-05",
         status: "Aberto",
         priority: "Media",
-        assigned: "Finanças"
+        assigned: "Candidato"
       },
       {
         id: 5,
-        desc: "Cobrança 2ª Prestação",
+        desc: "Analise dos dados da Candidatura",
         start: "2021-10-25",
         dueDate: "2021-11-05",
         status: "Aberto",
         priority: "Media",
-        assigned: "Finanças"
-      },
-      {
-        id: 6,
-        desc: "Cobrança 3ª Prestação",
-        start: "2021-11-25",
-        dueDate: "2021-12-05",
-        status: "Aberto",
-        priority: "Media",
-        assigned: "Finanças"
-      },
+        assigned: "Controle"
+      }
     ];
 
     return <Datatable columns={columns} data={data} link="/projects"
       canView={true} canEdit={true}
       handlerEdit={handlerEdit} />;
+  }
+
+  const TabConjuge = () => {
+    return (<>
+      <div >
+        Aqui ficarao os dados do conjuge
+      </div>
+    </>
+    );
+  }
+
+  const TabGuarantor = () => {
+    return (<>
+      <div >
+        Aqui ficarao os dados do avalista
+      </div>
+    </>
+    );
   }
 
   const TabBill = () => {
@@ -182,9 +194,15 @@ export default function Project({ project }) {
     },
     {
       index: 2,
-      title: "Contract",
+      title: "Conjuge",
       active: false,
-      content: <TabTask />,
+      content: <TabConjuge />,
+    },
+    {
+      index: 3,
+      title: "Guarantor",
+      active: false,
+      content: <TabGuarantor />,
     },
     {
       index: 3,
@@ -209,12 +227,12 @@ export default function Project({ project }) {
 
   return (
     <>
-      <SectionTitle title="Project" subtitle={`${project.code} - ${project.name}`} />
+      <SectionTitle title="Candidate" subtitle={`${candidate.code} - ${candidate.name}`} />
       <Widget
         title="Details"
         description={
           <span>
-            {project.name}
+            {candidate.name}
           </span>
         }
         right={
@@ -287,11 +305,11 @@ export const getServerSideProps = async (ctx) => {
 
   const { id } = ctx.params;
 
-  const project = await projectService.get_Project(id);
+  const candidate = await candidatesService.get_Candidate(id);
 
   return {
     props: {
-      project
+      candidate
     }
   };
 

@@ -10,6 +10,7 @@ export const baseStoreURL = publicRuntimeConfig.SERVER_URI; // API for vendor(st
 
 export const customHeaders = {
     Accept: 'application/json',
+    Authorization:`Bearer ${publicRuntimeConfig.Auth}`
 };
 
 export const baseUrl = `${baseDomain}`;

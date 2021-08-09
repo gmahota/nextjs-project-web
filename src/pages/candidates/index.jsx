@@ -7,14 +7,14 @@ import SectionTitle from "../../components/elements/section-title";
 import Widget from "../../components/elements/widget";
 import Datatable from "../../components/elements/datatable/ActionsTable";
 
-import projectsService from "../../services/projects";
+import candidatesService from "../../services/candidates";
 
 import { FiPlus } from 'react-icons/fi';
 import { AiFillFileExcel } from "react-icons/ai"
 
 
-export default function Schools({
-  allProjects,
+export default function Candidates({
+  allCandidates,
 }) {
   const router = useRouter();
 
@@ -38,29 +38,45 @@ export default function Schools({
           accessor: "name"
         },
         {
+          Header: "Province",
+          accessor: "province",
+        },
+        {
+          Header: "Cellphone",
+          accessor: "cellphone",
+        },
+        {
+          Header: "Email",
+          accessor: "email",
+        },
+        {
+          Header: "Debt Capacity",
+          accessor: "debtCapacity"
+        },
+        {
           Header: "Status",
           accessor: "status",
-        }
+        },
       ],
       []
     );
-    const data = allProjects;
-    return <Datatable columns={columns} data={data} link="/projects"
+    const data = allCandidates;
+    return <Datatable columns={columns} data={data} link="/candidates"
       canView={true} canEdit={true}
       handlerEdit={handlerEdit} />;
   };
 
   function handlerEdit(id) {
-    router.push(`projects/${id}/edit`)
+    router.push(`candidates/${id}/edit`)
   }
 
   function handlerAddNew() {
-    router.push("projects/new")
+    router.push("candidates/new")
   }
 
   return (
     <>
-      <SectionTitle title="Tables" subtitle="Projects" />
+      <SectionTitle title="Tables" subtitle="Candidates" />
       <Widget
         title=""
         description=""
@@ -105,11 +121,11 @@ export const getServerSideProps = async (ctx) => {
   }
   //await apiClient.get('/users')
 
-  const allProjects = await projectsService.get_Projects();
+  const allCandidates = await candidatesService.get_Candidates();
 
   return {
     props: {
-      allProjects
+      allCandidates
     },
   };
 };

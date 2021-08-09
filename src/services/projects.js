@@ -8,8 +8,10 @@ const get_Projects = async (filter) => {
     let res = [];
 
     await Repository.get(`${baseUrl}/projects`)
-      .then((data) => (res = data));
+      .then((response) => res =response.data)
 
+
+      console.log(res)
     return res;
   } catch (e) {
     console.error(e);
@@ -18,13 +20,12 @@ const get_Projects = async (filter) => {
 
 const get_Project = async (id) => {
   try {
-    const url =
-      baseUrl + `api/base/project/${id}`;
+    const url =`${baseUrl}/projects/${id}`;
 
     let res = {};
 
     await Repository.get(url)
-      .then((data) => (res = data));
+      .then((response) => (res = response.data));
 
     return res;
   } catch (e) {
