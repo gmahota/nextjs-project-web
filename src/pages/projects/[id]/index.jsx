@@ -106,17 +106,8 @@ export default function Project({ project }) {
         assigned: "DAF"
       },
       {
-        id: 2,
-        desc: "Seleceção dos Candidatos",
-        start: "2021-08-13",
-        dueDate: "2021-08-15",
-        status: "Aberto",
-        priority: "Maxima",
-        assigned: "Controle"
-      },
-      {
         id: 3,
-        desc: "Criação de Contrato",
+        desc: "Gestão do Contrato",
         start: "2021-08-16",
         dueDate: "2021-09-15",
         status: "Aberto",
@@ -157,8 +148,121 @@ export default function Project({ project }) {
       handlerEdit={handlerEdit} />;
   }
 
+  const TabContract = () => {
+    const columns = React.useMemo(
+      () => [
+        {
+          Header: "Id",
+          accessor: "id"
+        },
+        {
+          Header: "Customer",
+          accessor: "customer"
+        },
+        {
+          Header: "Name",
+          accessor: "name"
+        },
+        {
+          Header: "Cellphone",
+          accessor: "cellphone"
+        },
+        {
+          Header: "Last Payment",
+          accessor: "lastPayment"
+        },
+        {
+          Header: "Date Last Payment",
+          accessor: "dtLastPayment"
+        },
+        {
+          Header: "Render",
+          accessor: "render"
+        },
+        {
+          Header: "Total Payment",
+          accessor: "totalPayement"
+        },
+        {
+          Header: "Total",
+          accessor: "total"
+        },
+        {
+          Header: "Status",
+          accessor: "status",
+        }
+      ],
+      []
+    );
+    const data = [
+      {
+        id: 1,
+        customer: "C001",
+        name: "Guimarães Mahota",
+        cellphone: "849568415",
+        lastPayment: "6000",
+        dtLastPayment: "2021-08-10",
+        totalPayement: "12000",
+        total: "1000000",
+        render: 2,
+        status: "pedding"
+      }
+    ];
+
+    return <Datatable columns={columns} data={data} link="/projects"
+      canView={true} canEdit={true}
+      handlerEdit={handlerEdit} />;
+  }
+
   const TabBill = () => {
-    return <></>
+    const columns = React.useMemo(
+      () => [
+        {
+          Header: "Id",
+          accessor: "id"
+        },
+        {
+          Header: "Date",
+          accessor: "date"
+        },
+        {
+          Header: "Document",
+          accessor: "document"
+        },
+        {
+          Header: "Customer",
+          accessor: "customer"
+        },
+        {
+          Header: "Name",
+          accessor: "name"
+        },
+        {
+          Header: "Total",
+          accessor: "total"
+        },
+        {
+          Header: "Status",
+          accessor: "status",
+        }
+      ],
+      []
+    );
+    const data = [
+      {
+        id: 1,
+        date: "2021-07-10",
+        document: "VD 2021/1",
+        customer: "C001",
+        name: "Guimarães Mahota",
+        total: "1000000",
+        status: "pedding"
+      }
+    ];
+
+    return <Datatable columns={columns} data={data} link="/projects"
+      canView={true} canEdit={true}
+      handlerEdit={handlerEdit} />;
   }
 
 
@@ -184,7 +288,7 @@ export default function Project({ project }) {
       index: 2,
       title: "Contract",
       active: false,
-      content: <TabTask />,
+      content: <TabContract />,
     },
     {
       index: 3,
