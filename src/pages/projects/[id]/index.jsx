@@ -10,7 +10,7 @@ import SectionTitle from "../../../components/elements/section-title";
 import Widget from "../../../components/elements/widget";
 import { UnderlinedTabs } from "../../../components/elements/tabs";
 
-import { FiEdit, FiPrinter, FiSend, FiTrash } from 'react-icons/fi';
+import { FiPlus, FiEdit, FiPrinter, FiSend, FiTrash } from 'react-icons/fi';
 import { AiFillFileExcel, AiFillFilePdf } from "react-icons/ai"
 
 //Services
@@ -209,9 +209,57 @@ export default function Project({ project }) {
       }
     ];
 
-    return <Datatable columns={columns} data={data} link="/projects"
-      canView={true} canEdit={true}
-      handlerEdit={handlerEdit} />;
+    return (
+      <Widget
+        title="Details"
+        description={
+          <span>
+            {project.name}
+          </span>
+        }
+        right={
+          <div className="flex flex-col lg:flex-row lg:flex-wrap items-start lg:items-center justify-start space-y-2 lg:space-y-0 lg:space-x-2">
+
+            <button
+              className="btn btn-default btn-rounded bg-blue-500 hover:bg-blue-600 text-white"
+              type="button">
+
+              <FiPlus className="stroke-current text-white" size={18} />
+              <span>New</span>
+            </button>
+            <button
+              className="btn btn-default btn-rounded bg-blue-500 hover:bg-blue-600 text-white"
+              type="button">
+
+              <FiPrinter className="stroke-current text-white" size={18} />
+              <span>Print</span>
+            </button>
+
+            <button
+              className="btn btn-default btn-rounded bg-blue-500 hover:bg-blue-600 text-white"
+              type="button">
+
+              <AiFillFileExcel className="stroke-current text-white" size={18} />
+              <span>Importar</span>
+            </button>
+            <button
+              className="btn btn-default btn-rounded bg-blue-500 hover:bg-blue-600 text-white"
+              type="button">
+
+              <AiFillFilePdf className="stroke-current text-white" size={18} />
+              <span>PDF</span>
+            </button>
+
+          </div>
+        }
+      >
+        <Datatable columns={columns} data={data} link="/projects"
+          canView={true} canEdit={true}
+          handlerEdit={handlerEdit} />
+      </Widget>
+
+
+    );
   }
 
   const TabBill = () => {
